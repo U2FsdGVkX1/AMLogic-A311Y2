@@ -1,0 +1,17 @@
+[Unit]
+Description=Device Agent Toolkit
+After=network-online.target device-agent.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/device-agent-toolkit
+Environment=HOME=/opt/device-agent-toolkit
+ExecStart=/usr/bin/uv run python3 src/main.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

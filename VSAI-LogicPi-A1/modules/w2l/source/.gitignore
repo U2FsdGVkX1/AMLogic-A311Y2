@@ -1,0 +1,34 @@
+# common files
+*.rej
+*.orig
+*.swp
+*.swo
+*.log
+build_dir
+cscope.*
+tags
+GPATH
+GRTAGS
+GTAGS
+
+# driver compiled files
+*.ko
+*.mod
+*.mod.c
+*.o
+.*.o.d
+.*.cmd
+*.order
+*.usyms
+*.symvers
+*.symversions
+patch_test.c
+
+# firmware compiled files
+*.orom
+*.asm
+bin_rom
+file_list.mk
+fw_flash.hex
+flash.hex
+*.pm

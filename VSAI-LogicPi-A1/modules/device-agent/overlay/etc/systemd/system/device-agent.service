@@ -1,0 +1,17 @@
+[Unit]
+Description=Device Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/device-agent
+Environment=HOME=/opt/device-agent
+ExecStart=/opt/device-agent/device-agent
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

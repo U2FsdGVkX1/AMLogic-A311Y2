@@ -1,0 +1,23 @@
+diff --git a/aml_drv/mkvers.sh b/aml_drv/mkvers.sh
+--- a/aml_drv/mkvers.sh
++++ b/aml_drv/mkvers.sh
+@@ -18,8 +18,8 @@
+ 
+ export PATH=$PATH:/usr/bin
+ 
+-VERDIR=$(dirname $(readlink -f $0))
+-TARGET=$1
++VERDIR=$(dirname "$(readlink -f "$0")")
++TARGET=$(readlink -m "$1")
+ 
+ DATE_FORMAT1="%b %d %Y %T"
+ DATE_FORMAT="W2l.%Y.W%02W.%02w"
+@@ -34,7 +34,7 @@ if [[ ! -d ../firmware && -f $TARGET ]];then
+ if (svn info . >& /dev/null)
+ then
+     svnrev=svn$(svnversion -c | sed 's/.*://')
+-elif (git status -uno >& /dev/null)
++elif [ -d .git ] && (git status -uno >& /dev/null)
+ then
+     # If git-svn find the corresponding svn revision
+     if (git svn info >& /dev/null)

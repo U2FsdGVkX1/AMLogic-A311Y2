@@ -1,0 +1,23 @@
+load("//build/kernel/kleaf:kernel.bzl", "kernel_module")
+load("//common:common_drivers/project/project.bzl", "GPU_TYPE")
+
+kernel_module(
+    name = "gpu",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "BUILD.bazel",
+            "**/*.bzl",
+            "**/*.mk",
+            "**/*.bp",
+        ],
+    ),
+    outs = ["mali_kbase.ko","protected_memory_allocator.ko",] if GPU_TYPE == "vale" else \
+           ["mali_kbase.ko",],
+
+    kernel_build = select({
+        "//common:common_drivers_on_top_dir": "//common_drivers:amlogic",
+        "//conditions:default": "//common:amlogic",
+    }),
+    visibility = ["//visibility:public"],
+)

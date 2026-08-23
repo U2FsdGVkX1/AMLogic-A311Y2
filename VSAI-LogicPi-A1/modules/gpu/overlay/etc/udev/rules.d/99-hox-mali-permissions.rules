@@ -1,0 +1,4 @@
+SUBSYSTEM=="drm", KERNEL=="card0", MODE="0666"
+SUBSYSTEM=="drm", KERNEL=="renderD128", MODE="0666"
+SUBSYSTEM=="dma_heap", GROUP="video", MODE="0666"
+KERNEL=="mali0", MODE="0666"

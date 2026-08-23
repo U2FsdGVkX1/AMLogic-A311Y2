@@ -1,0 +1,17 @@
+[Unit]
+Description=Amlogic LLM OpenAI compatible API service
+After=network.target
+ConditionPathExists=/usr/share/amllm/Qwen2.5-0.5B-Instruct_quant_i8_s905x5.adla
+ConditionPathExists=/usr/share/amllm/tokenizer.json
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/amllm
+ExecStart=/usr/bin/python3.10 /usr/share/amllm/app.py --model /usr/share/amllm/Qwen2.5-0.5B-Instruct_quant_i8_s905x5.adla --tokenizer /usr/share/amllm/tokenizer.json --model-type qwen --host 0.0.0.0 --port 8000 --served-model-name qwen2.5-0.5b-instruct
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
