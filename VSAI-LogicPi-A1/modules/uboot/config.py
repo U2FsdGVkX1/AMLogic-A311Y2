@@ -20,15 +20,14 @@ def configure(ctx: ConfigContext) -> Module:
             "CROSS_COMPILE": "aarch64-linux-gnu-",
             "ARCH": "arm",
             "CONFIG_BYPASS_AOCPU": "y",
+            "KCFLAGS": "-DCONFIG_YOCTO",
         },
         build=[
             git(
                 src="git@github.com:U2FsdGVkX1/AMLogic-A311Y2_uboot.git",
                 path=Path("."),
             ),
-            # --disable-bl33z skips the optional ramdump companion; only bl33
-            # (the real u-boot) is compiled, the rest are prebuilt blobs.
-            shell(cmds=["./mk s6_bq201 --disable-bl33z"]),
+            shell(cmds=["./mk s6_bq201"]),
             *[cp(src=Path("build") / name, dest=Path(".")) for name in ARTIFACTS],
         ],
         install=[
